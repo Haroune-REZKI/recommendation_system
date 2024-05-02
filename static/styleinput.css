@@ -1,0 +1,123 @@
+body {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.navbar {
+    background-color: #ffffff;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-logo {
+    width: 50px;
+    /* Adjust the width of the logo as needed */
+    height: auto;
+}
+
+.navbar-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-link {
+    margin-right: 20px;
+}
+
+.navbar-link a {
+    text-decoration: none;
+    color: #2489D3;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar-link a:hover {
+    color: #000000;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.input-field {
+    width: 300px;
+    padding: 10px;
+    margin: 20px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.card {
+    width: 800px;
+    margin: 10px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #555;
+}
+
+.submit-button {
+    padding: 10px 20px;
+    background-color: #2489D3;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.submit-button:hover {
+    background-color: #000000;
+}
+
+.card p {
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.price {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.enroll-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.enroll-button:hover {
+    background-color: #45a049;
+}

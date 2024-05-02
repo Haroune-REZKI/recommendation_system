@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .profile {
+            border: 1px solid #ccc;
+            margin: 10px;
+            padding: 15px;
+            background-color: #fff;
+            cursor: pointer;
+        }
+
+        .profile:hover {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Profiles</h1>
+    </header>
+
+    <div class="profile" onclick="showProfile('John', 'Web Developer')">John</div>
+    <div class="profile" onclick="showProfile('Jane', 'Graphic Designer')">Jane</div>
+    <div class="profile" onclick="showProfile('Mike', 'Data Scientist')">Mike</div>
+    <div class="profile" onclick="showProfile('Emily', 'Software Engineer')">Emily</div>
+    <div class="profile" onclick="showProfile('Alex', 'UX/UI Designer')">Alex</div>
+
+    <script>
+       
+        function showProfile(name, occupation) {
+            // Encode the name to ensure it's a valid URL parameter
+            const encodedName = encodeURIComponent(name);
+            localStorage.setItem('user', name);
+            // Redirect to /index with the name as a GET parameter
+            window.location.href = `/index?name=${encodedName}`;
+        }
+    </script>
+</body>
+</html>

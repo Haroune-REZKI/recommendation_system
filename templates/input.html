@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap">
+
+    <link rel="stylesheet" href="./static/styleinput.css">
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="navbar-logo">
+            <img alt='img' src="https://cdn-icons-png.flaticon.com/128/4762/4762311.png"
+                data-src="https://cdn-icons-png.flaticon.com/128/4762/4762311.png" alt="Online course "
+                title="Online course " width="45" height="45" class="lzy lazyload--done"
+                srcset="https://cdn-icons-png.flaticon.com/128/4762/4762311.png 4x">
+        </div>
+        <ul class="navbar-links">
+            <li class="navbar-link"><a href="/">Home</a></li>
+            <li class="navbar-link"><a href="/myCourses">My Courses</a></li>
+            <li class="navbar-link"><a href="#">About Us</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <form action="/recommend" method="POST">
+            <input type="text" class="input-field" placeholder="Type a course title..." name="title">
+            <button type="submit" class="submit-button">Get Recommendations</button>
+        </form>
+    </div>
+
+    <div id="content">
+
+    <h2>Udemy Recommendations</h2>
+    <div class="recommendations-container">
+        {% for recommendation in udemy_recommendations %}
+        <div class="card">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARYAAAC1CAMAAACtbCCJAAACSVBMVEX////0+PsAAADu8vX5+vxMUZHX3ujt8PPw9Pf9/f/8/Pw8QorW1+NmaNn39/mBcOaPduwnJlB8b+NBRX3dit96enrk6e//kIVESoSHc+lmZtv/jog3OnHX2+I+SpLJyckwMmPXiOJaVtYAAC//jIzs7OyNjY2Ecu6dnZ1AQEGYm6o5Pnf+u0b+tkeDg4Pg5PNbW1wtL17/l43+vUX9gZ/8rklmaMR4e+b/hZe+xNGkNfAAAEZvb28AAD9ZWcEhIEN0Y+NPT08tLS2ysrLUqoVWUdeQkOXcl+f7pkv5m0306O3/vLb/wTswRYX/h5TDu/PWs4OcjaKdFu+Na+/Pn/bNjJ0xMTH2zabDxOwAADtMRtbb3/MfI2ZUV7VTV6T+jz77sm8fHEpzGi/nzdivO3P/zcn/3dr/qqL35Pfwxe3tt+nt0fDig9znneL35/n/6cX73af27uD/04P/x1h2a4mDb3+NZYSmbY7BdIzYfY3fuXlgVZl/YquXabqrnMjOrLvsu8UmLnhXXIxtcZiprcGAClGHK1P5mJ0AKGBjUXVUPWjpfqUQGFP+z4ixqO6Xi+m6xuT/fKOBbp37lrS8dfPcuvi0ovOsTPG0Y/L9rCzywpq7uuz0mnz3dTXUoXvy0cJFRJ3BoOeMj7G7d8WGh+OUd3yug3LUkWDollXMe2G3b2ejZGyMWXBzT3L8dk39wGb7rlz6q308P2LUhX/zwqzuZUfvcWj/miyvaqN2gsnYlYu9oaakVnOHFUNuACOmGWJlAAC8RFTRclDhnUzPAAAOWUlEQVR4nO2ci18TRx7A8yIJCxuUxwqBJBJJeJrgg8RUizxqCvHBFatEo4hVaQWt0tpKz6NY5bxWEcq10iJt7dV6atXa2l71rtXe9S+7+c3MZjdPVhMNifP9mJDshiXz9ff7zezu7KpUDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDwJnA7g8jP9PRYRnE4tQ8dl+vssCiKcUJ57M/Gk4JjJ9BfLKAmkPA9iTIc2bx6MvyqJlVwXs/mXZUAcMfnJreS0mNeXLVsNWn45FLNqQSuIHO2xB5dRLavl8fLG4aHDw0qs5GrAbKZaVqMnE102XHrkSGnpkdJhLrkRQS8IOerldVHLssrK18miIeQEc2QoqRehUK/Xa42FhULumSFKlq2uBAKw5KhoBXlJlEgGC4oTsKIXLPAj061IKzBUI2WlkmjZjBYeLZUT34rRh1RY9BLqTDcljeAWYi3USmWlLIOShQtOHzlqLmd2B9RUS2WlqKWmZvDNCCulpUNxtWh9+hgMmW5POuCOHT8+Ai0EHatXEyk1NYdejrRSejSeFZ2FRosgGCQvpoX/6iKHe2sLcNekNuEwWU2k1NSsjbJSHUeL6ESvJXUmZ8KFQ0rWILascQSIlhrKtmqZktLq6urDsXVFTKDwEvo+63vpt9dgQM6hZRFaasJaqrGVanfCcitbRBIq23ujY1uIlZdOnHjn3XdPnjw5ingPsW1bTZSVoyqdLuqIi5FEi1FuCmvRZXm4oGCBePmz1ZpnzQO2Wq3WreQJkZd36tSpvwBjY+/7fL5CKK1GKRYMEC5Cvk43fvr0ocHBwUAgkAvFhYNgQV7+hJz0A0hMeQRbJQoQHxAKGsvPnD179hugYcLne+Wv59at24b5m5D9g7oRkkOgxbOEUoEoRvA83+rxePYisDGrtby8pKSxpLERPxqrwuzZU1X14VrqpeajhhzR0gRavMhIbUUF+tdWUSQhfw0QYa2trXupLyuKIeTow/fWrSNizq/3QdHN5uoCWpqaqJaKWt1UkWra724rikdxJBFLi4rMF9atI2LOT/r0BlR8M922FOC2NGFAC8od9PBXLJmtXUhJHMwX1q4lXk5N+gQ8/s1041KgKayFr0AJU4H/PbYTqoWIEbVkc7hcBCkrkRbr+z2Iqamp2Vn/9LTXW1zUFofEnogWEIO06LGXLD60exdJWQlaCixx1nImo+B2hxBBxPw89jY16/cTc8UyYfYLM9QLaNFndxaNzIGVlSuRlkKyJB/9H3P5+Rw+/U7PwSdBbTQIAoj7+MLMDBHzd6RFm91Z1ESsJNIiYZJhNOKHMYwWPfSfzMwQMa+sL6R7A5lt25NzkVpJVYtWi7V8oj89A1osdNcpbUfp3kzXhhTBza2Mp4VLokWXUMuFmdNqrX58ZgZpEQ9RpedrDn/W+2p6tqSMY02PqYVzBzkukZYDRq1Bq/fJtKQliwKf9r7wQu8Ll9KxLWUce6xo0ancs9u3TweRl1gtWsGAfhgMWkFIr5ZXkRSg97PhNGxNESNUS4sCLVgK7EluX4LExGrBTwaEsSGNWt7ohVD5HLvp/TTlzSmEWllYCydKEcWoo7Vo42lJueYO95L8eRMy6bOIVTA8SHXzCUDh0oJJriVCiiiGU6Al5Zo73CtWW1R3I7Vs0Gg2pLr5RIhekmnhVKHpCClSxDx1LYc/lfrmS59HrCrTaMpS3Xwi8k1350DLSwm1xJUC1Epinp6W/IRvnqoWNO7qm0uiBUupiGcFi5lXq5NqeZrj3KesRT2SUAtIaasgiCoi2F7bY1TnqBa1I4EWTpISZkcMlx3RWl5MnxaHy+kiJ247nc46uqi9o77MJmmxbejQaOrrcLdkcTmdaEF9vcuAPuls3tnuRMudTpeNbtCENhjvWEEkZCpPX3wtqp622mgttdG0Tfc9RS02jUbjwK9cGs1O+OnUENqbqZZmukBjo5+vI28dnXS5I/y7CFi58J+l8yfvx08iFTdfFCMmQlLbrJt7ZlrqVTh1JEBLB7zoEL3YNLHsVDnQMw0R0KZYyw8JSi6XVAyWYjQ+Sy04AjodDls91QKaIH8c9TgMsJY6h4OEkM1h2YmNtItjHFivZDYF+fZdiTtolWrKHHFkN2ylCEtJqiXlDjpaC0QGWVOGtTho8qhw2NSRJIJ3GhogBo24GNeeZoVjQPztHQmSiHgJ2s3F0Ue9iyqKeLubDFueoRaLZAE0lEH0dODdAA6qRrvU/jKxnKCPOcO5Y5KySYGWvuRaNvE8HyWm2Myb7W7js9bSKSuYTtAiFmAK/rz48Wb8oh1rqSOWnKRAKdTSlSSJQIvdzPMQMeJpMyQFoUBLysf+Y7WEm9UJWlwKtdBkkwVbcmDg0regFrsZCJ/7ICjQkqqVZNFSR6Olvk4ioRYV7s5tGiW9MwADl4GFtdipCknKs9ZSBlpsstog1Zaoz8fVglfUK+qdMUq18ATxZ7Ik2pU+LRD80CpcLF3ynsgV7ok6yQJTUi3wmy6xHivToiCJ7DIdUVoCX6gTaUnDIW4YqDlNKttOUhYgizo6TZytmY5bNog9cqem2ZFMCxn7Kj5Cg4qLSYEW5CXaDNVy5cuEWtJwtlU2bMXFtlkjA2nR4RcdHaTiJtHCacShjCKguJgGvkqshXPvttul6iKDW0hL6lbouBZoJ/Evjv7r28ngX9cufmCDSqalDEYxQD3VguNqZ7y/EB/cAFtB4qNzKj/xEmVmU5CM5q7sS6QlPaeJHE4IhQ3hjtXiQu83dKo6XS5SVWxgqsNpIStdLrwQrSXVtU7ce7ZIZUgJuAGWJFpkXmRsmqcHc0cuJyq5i2vqv/LeGcMtqAWVF/PuTRFOdntDiQ9xi1qeSuuemJ3Ke2fMwlrQnnTQv2n3Jspu81SIUyc+IUK1LK55HFCjHutKBN3CWkCMyh2ch9kt80GBnHClTtTRczsaVlhwCC6iWT+O5nZxAKSYfCVa4GQrbbZOLT/ZKrzT7+WlQkyzLMgtqhyyaDRRw2EFRGnhks1YiJ7Iodv4Ne6W5NhRnhkWVQ6BlvrHvZgnX1m0hFGjyEEqcf0wrGj1/iOGIXtoMQWLymSzOR7/t+RaksCZDAZBsFgKC32IiYmJhoaGb/a3+l9GlMouJ7n6YIgPLa7e+Yng1JaCvDOCCTVaKCzErZ4A8JT+s2fPnjlTXtK4J4YPEas2Ei0vV0tcvYq0ZLpN6QBFS15eQSTkEpFymOdfguf4R0zzX06Jo+Xq1bEh3p3pJqUF0BKD7DqRkigrMVpkwVI99rxoofESawW0fHsYMXSJQGbuTu3OXS0RVrCXWCugxcxH99Cog35utJSUxAuWVRs9PNLCy/eY8AHNTLcoLcTREmNFErNcxkaPF4g8EsM/X1pQKkVHDNLiQZjhiiv+a6t1a2sB+ljOaolvRdIiRYsHqjFfjkpPawF9anzOtDTG02K19veb4RI9c2srT3Yb7UKmW5QWYrQotbIqorbANYx86969/TmjxRqNdKEvuZQ1YuSyfM8kYtXyex/t93jhOmHeioZ8PJQVVFsaq3JBCzcyMvLOtWv/RHx1/fr1GzdudKPH9T9u3rz53Xff3bp16/bt23fu3Dl/vqQRAgY1vWBCvEjcuMLjqUK6vEheFQ9yeUinbNcy0jKHodcskkndLV1A9z7Kl5jvEXe2YjGNBRPiDdeEFShaUE/k5fmIDjq7tXD3u8g07hYyz72pac2aixeP9wFXALg/gMMhYLQTH4i7jGflWjBwGTm/tx9FC+6gs1tLH44L7OUuAnm5S5orHrk2wCEWiuGMNM6VacEdtLccemnaQZdb7dl9j4XLXSJYS0vLFhN1YsSH8Q0RWvaE+6A9gkxLFWiB2w3gjoh00Nmt5cduBPGCrPzQ0vKWFCrRVgT9ZHjIP+nTRSURBnkhmZTlWi53U7q6BpCWrpXHk2ixTK4Kc4/eygW0eFCgePtRB+1BZaURddDlJXZjpluWEiP7RC/dAwMDSMuxsJaYHBKE9SBk6VJ42n/PosrXhZOoygtDPW8/Gu/yOaBF9eM+uZbuluOJS4tguLdUxotLGywqFWhBwQL7i+JgF/dEWa4FeUFQLQPd3W9H55A8Wl7ZL/eydD8yI6stHpxOVh7vKma5luk2s2fs5E83qJvuuXAWAQZHYPDKlZ9//vGLL77//st//XJbLgUxucK3Cwb/1nJvHpLhoR00KrmZbldq9LSJkwQ9D0ZBTveW4yPHjvX1Xb6IKs39+/tu3PxpdPTB2NiY3++f+vcecLF/14uTS+/d++jEiRMNE4ZdtLbklef1ez2trfh866ZgphuWGnCrFmlOqR3J2XH9h4Gv/rPj5IOrY9PT/tmpnmAw5BYgpwSD7xtQAfeCsujRoFcNRZcM/nEWFfO8149+4eNQtt+kcL4WbteCxdCdmrYlsz09wVDIHWecq8uHeQj5cPI1PN9pYn1r8bd+bE9YRHMUUmRJLdwjSxTDm9sucaS2aGMKriCObMV5lPR8ag6cVo1ldvt2uDJGTKVpVaLBXKQWXYLIMDkCB2y//vrrtVu3Xnu2DUk3oZ7p7bW1JJdqe7g4gzn6KhQS8OyFSCOmQODAgfHxHTtGfzv38OGjR6+JPApkqEFpQxecWtIG1RdpEQdzYAbXFvfHwfkpP/RE82Q0YkIeQMTo6MGDv2MeIl6L4NGjR/99grkTiw93cLa2rW0JTRKj1h0K9kzhzmg+KHUtI30DLf8TXZwDHso499utayiDbDZLINs7IzmQTz3Bntnp6WnomkMRY9XA+Mmbc3NzXV1//C5x8ODo6I7x8QMHAjklIob84SgbYVANGYSB3sBPz4UIBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg5Hl/B8NX09x82TzTAAAAABJRU5ErkJggg==" width=200px alt="Card Image">
+            <p>{{ recommendation.course_title }}</p>
+            <p class="price">${{ recommendation.price }}</p>
+            <a href="{{ recommendation.url }}"><button class="enroll-button" id="youtube-enroll-{{ loop.index }}" onclick="saveToLocalStorageAndFile('{{ recommendation.course_title }}')">Enroll Now</button></a>
+
+        </div>
+        {% endfor %}
+    </div>
+
+    <h2>Coursera Recommendations</h2>
+    <div class="recommendations-container">
+        {% for recommendation in coursera_recommendations %}
+        <div class="card">
+            <img src="https://media.licdn.com/dms/image/D4D12AQHFNRDblsU1xQ/article-cover_image-shrink_600_2000/0/1677528528545?e=2147483647&v=beta&t=4m_zBymL0oPBiZ2FXqP66zoUzoAza5GkNdUOyM_nWGc" width=200px alt="Card Image">
+            <p>{{ recommendation.course_title }}</p>
+            <p class="price">${{ recommendation.price }}</p>
+            <a href="{{ recommendation.url }}"><button class="enroll-button" id="youtube-enroll-{{ loop.index }}" onclick="saveToLocalStorageAndFile('{{ recommendation.course_title }}')">Enroll Now</button></a>
+
+        </div>
+        {% endfor %}
+    </div>
+    
+    <h2>Youtube Recommendations</h2>
+    <div class="recommendations-container">
+        {% for recommendation in youtube_recommendations %}
+        <div class="card">
+            <img src="data:image/jpeg;base64,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" width=200px alt="Card Image">
+            <p>{{ recommendation.course_title }}</p>
+            <p class="price">${{ recommendation.price }}</p>
+            <a href="{{ recommendation.url }}"><button class="enroll-button" id="youtube-enroll-{{ loop.index }}" onclick="saveToLocalStorageAndFile('{{ recommendation.course_title }}')">Enroll Now</button></a>
+
+        </div>
+        {% endfor %}
+    </div>
+    
+</div>
+    </div>
+    </div>
+
+    <script>
+      
+
+        function enrollCourse(courseTitle) {
+            event.preventDefault();
+            console.log("Enrolled in course: ", courseTitle);
+            const encodedName = encodeURIComponent(name);
+            console.log(nameio)
+        }
+        
+        // Function to save an object to local storage and append to a file
+        function saveToLocalStorageAndFile(value) {
+  let existingData = localStorage.getItem(nameio);
+
+  // If there's existing data, parse it from JSON
+  let dataArray = existingData ? JSON.parse(existingData) : [];
+  dataArray.push(value);
+
+  // Save the updated array back to LocalStorage
+  localStorage.setItem(nameio, JSON.stringify(dataArray));
+
+  // Create a stringified JSON object to ensure compatibility with Python
+  const jsonString = JSON.stringify({ courses: dataArray }); // Enclose data in a JSON object
+
+  // Create and download the JSON file
+  createAndDownloadFile(jsonString, filename + '.json', filePath);
+}
+
+        
+    function createAndDownloadFile(content, filename, filePath) {
+      // Append the file path to the filename
+      const fullFilename = `${filename}`;
+      
+      const blob = new Blob([content], { type: 'text/plain' });
+      const downloadLink = document.createElement('a');
+      downloadLink.href = URL.createObjectURL(blob);
+      downloadLink.download = fullFilename;
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+    }
+
+        
+        
+        
+        
+        // Retrieve an object from local storage
+        function getFromLocalStorage(key) {
+            var value = localStorage.getItem(key);
+            return value ? JSON.parse(value) : null;
+        }
+
+        nameio = localStorage.getItem("user")
+        list = localStorage.getItem(nameio)
+        filename = nameio
+        filePath= 'C:\Users\HR\Desktop\0x3rd year\Data Mining\recommendation system'
+
+
+        
+   
+  </script>
+       
+</body>
+
+</html>
